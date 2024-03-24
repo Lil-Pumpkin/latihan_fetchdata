@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Heroes</title>
+    <link rel="stylesheet" href="index.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+</head>
+<body>
+    <nav class="py-3">
+        <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
+          <div class="relative flex h-16 items-center justify-between">
+            <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
+              <!-- Mobile menu button-->
+              <button type="button" class="inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white" aria-controls="mobile-menu" aria-expanded="false">
+                <span class="sr-only">Open main menu</span>
+                <!--
+                  Icon when menu is closed.
+      
+                  Heroicon name: outline/bars-3
+      
+                  Menu open: "hidden", Menu closed: "block"
+                -->
+                <svg class="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+                </svg>
+                <!--
+                  Icon when menu is open.
+      
+                  Heroicon name: outline/x-mark
+      
+                  Menu open: "block", Menu closed: "hidden"
+                -->
+                <svg class="hidden h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+            </div>
+            <div class="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start" data-aos="fade-down" data-aos-delay="50">
+              <div class="flex flex-shrink-0 items-center px-2">
+                <img class="block h-8 w-auto lg:hidden" src="img/pngegg.png" alt="Your Company">
+                <img class="hidden h-8 w-auto lg:block" src="img/pngegg.png" alt="Your Company">
+              </div>
+              <div class="hidden sm:ml-6 sm:block" data-aos="fade-down" data-aos-delay="200">
+                <div class="flex space-x-4">
+                  <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
+                  <a href="index.html" class="border-y-2 border-x-2 border-yellow-400 text-yellow-400 px-3 py-2 rounded-md text-lg font-medium" aria-current="page">Home</a> 
+                  <a href="heroes.html" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-lg font-medium" data-aos="fade-down" data-aos-delay="400">Heroes</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>    
+     </nav>
+
+     <div data-aos="fade-right" data-aos-delay="50">
+        <div class="heroes" data-aos="fade-right" data-aos-delay="100">Heroes</div>
+        <div>
+            <div class="desc" data-aos="fade-right" data-aos-delay="200">
+                <p class="text-gray-300">
+                    It may be that the gulfs will wash us down: It may be we shall touch the Happy Isles, 
+                    <br>
+                    And see the great Heroes,
+                    <br>
+                    whom we knew. Tho’ much is taken, much abides; and tho’
+                </p>
+            </div>
+        </div>
+     </div>
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+      AOS.init();
+    </script> 
+    <footer class="text-white px-2">
+      <p>Copyright Aris Cahyadi</p>
+    </footer>
+</body>
+</html>

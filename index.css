@@ -1,0 +1,24 @@
+body {
+    background-image: url(img/index.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.heroes{
+    margin-top: 15rem;  
+    font-size: 3rem;
+    color: white;
+    font-family: 'Montserrat', sans-serif;
+    padding-left: 100px;
+}
+
+.desc{
+    margin-top: 1rem;
+    font-size: 1.5rem;
+    margin-left: 0.5rem;
+    margin-bottom: 19rem;
+    color: grey;
+    padding-left: 60px;
+    opacity: 0.8;
+}
+

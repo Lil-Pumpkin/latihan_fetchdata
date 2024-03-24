@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Heroes</title>
+    <link rel="stylesheet" href="heroes.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+</head>
+  <body>
+    <nav class="py-3">
+      <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
+        <div class="relative flex h-16 items-center justify-between">
+          <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
+            <!-- Mobile menu button-->
+            <button type="button" class="inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white" aria-controls="mobile-menu" aria-expanded="false">
+              <span class="sr-only">Open main menu</span>
+              <!--
+                Icon when menu is closed.
+    
+                Heroicon name: outline/bars-3
+    
+                Menu open: "hidden", Menu closed: "block"
+              -->
+              <svg class="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+              </svg>
+              <!--
+                Icon when menu is open.
+    
+                Heroicon name: outline/x-mark
+    
+                Menu open: "block", Menu closed: "hidden"
+              -->
+              <svg class="hidden h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
+          </div>
+          <div class="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start" data-aos="fade-down" data-aos-delay="50">
+            <div class="flex flex-shrink-0 items-center px-2">
+              <img class="block h-8 w-auto lg:hidden" src="img/pngegg.png" alt="Your Company">
+              <img class="hidden h-8 w-auto lg:block" src="img/pngegg.png" alt="Your Company">
+            </div>
+            <div class="hidden sm:ml-6 sm:block" data-aos="fade-down" data-aos-delay="200">
+              <div class="flex space-x-4">
+                <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
+                <a href="index.html" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-lg font-medium">Home</a> 
+                <a href="heroes.html" class="border-y-2 border-x-2 border-yellow-400 text-yellow-400 px-3 py-2 rounded-md text-lg font-medium" aria-current="page" data-aos="fade-down" data-aos-delay="400">Heroes</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>    
+   </nav>
+
+    <div class="search-container px-20 py-10 static">
+      <input type="text" id="searchInput" placeholder="Search for heroes...">
+      <button onclick="search()">Search</button>
+    </div>
+    <br>
+    <table id="heroesTable">
+      <thead>
+        <tr>
+          <th>
+            Name
+            <button onclick="sortName1()">+</button>
+            <button onclick="sortName2()">-</button>
+          </th>
+          <th>
+            Birth year
+            <button onclick="sortBirth1()">+</button>
+            <button onclick="sortBirth2()">-</button>
+          </th>
+          <th>
+            Death year
+            <button onclick="sortDeath1()">+</button>
+            <button onclick="sortDeath2()">-</button>
+          </th>
+          <th>
+            Description
+            <button onclick="sortDesc1()">+</button>
+            <button onclick="sortDesc2()">-</button>
+          </th>
+          <th>
+            Ascension year
+            <button onclick="sortAscn1()">+</button>
+            <button onclick="sortAscn2()">-</button>
+          </th>
+            
+        </tr>
+      </thead>
+      <tbody id="heroesList"></tbody>
+    </table>
+
+    <script>
+      // Initialize variables
+      let heroes = [];
+      let searchBy = "name";
+      // Fetch data from API
+      fetch('https://indonesia-public-static-api.vercel.app/api/heroes')
+        .then(response => response
+            .json())
+        .then(data => {
+            heroes = data;
+            displayHeroes();
+            });
+            
+        // Display heroes
+        function displayHeroes() {
+            let heroesList = document.getElementById('heroesList');
+            heroesList.innerHTML = '';
+            heroes.forEach(hero => {
+                let row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${hero.name}</td>
+                    <td>${hero.birth_year}</td>
+                    <td>${hero.death_year}</td>
+                    <td>${hero.description}</td>
+                    <td>${hero.ascension_year}</td>
+
+                `;
+                heroesList.appendChild(row);
+            });
+          }
+        // Search heroes
+        function search() {
+            let searchInput = document.getElementById('searchInput').value;
+            if (searchBy === "name") {
+                heroes = heroes.filter(hero => hero.name.toLowerCase().includes(searchInput.toLowerCase()));
+            } else if (searchBy === "birth_year") {
+                heroes = heroes.filter(hero => hero.birth_year.toLowerCase().includes(searchInput.toLowerCase()));
+            } else if (searchBy === "death_year") {
+                heroes = heroes.filter(hero => hero.death_year.toLowerCase().includes(searchInput.toLowerCase()));
+            } else if (searchBy === "description") {
+                heroes = heroes.filter(hero => hero.description.toLowerCase().includes(searchInput.toLowerCase()));
+            } else if (searchBy === "ascension_year") {
+                heroes = heroes.filter(hero => hero.ascension_year.toLowerCase().includes(searchInput.toLowerCase()));
+            }
+            displayHeroes();
+        }
+        
+        
+        // Sort heroes
+        function sortAsc() {
+            heroes.sort((a, b) => a.name.localeCompare(b.name));
+            displayHeroes();
+        }
+        function sortDesc() {
+            heroes.sort((a, b) => b.name.localeCompare(a.name));
+            displayHeroes();
+        }
+        function sortName1() {
+            heroes.sort((a, b) => a.name.localeCompare(b.name));
+            displayHeroes();
+        }
+        function sortName2() {
+            heroes.sort((a, b) => b.name.localeCompare(a.name));
+            displayHeroes();
+        }
+        function sortBirth1() {
+            heroes.sort((a, b) => a.birth_year - (b.birth_year));
+            displayHeroes();
+        }
+        function sortBirth2() {
+            heroes.sort((a, b) => b.birth_year - (a.birth_year));
+            displayHeroes();
+        }
+        function sortDeath1() {
+            heroes.sort((a, b) => a.death_year - (b.death_year));
+            displayHeroes();
+        }
+        function sortDeath2() {
+            heroes.sort((a, b) => b.death_year - (a.death_year));
+            displayHeroes();
+        }
+        function sortDesc1() {
+            heroes.sort((a, b) => a.description.localeCompare(b.description));
+            displayHeroes();
+        }
+        function sortDesc2() {
+            heroes.sort((a, b) => b.description.localeCompare(a.description));
+            displayHeroes();
+        }
+        function sortAscn1() {
+            heroes.sort((a, b) => a.ascension_year - (b.ascension_year));
+            displayHeroes();
+        }
+        function sortAscn2() {
+            heroes.sort((a, b) => b.ascension_year - (a.ascension_year));
+            displayHeroes();
+        }
+
+
+
+
+        // Search by
+        function searchByName() {
+            searchBy = "name";
+        }
+        
+    </script>
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+      AOS.init();
+    </script> 
+    <footer class="text-white px-2">
+      <p>Copyright Aris Cahyadi</p>
+    </footer>
+    </body>
+    </html>
+
